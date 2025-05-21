@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Get the container element
+    // Get the DOM elements
     const container = document.getElementById('container');
     const changeSizeBtn = document.getElementById('change-size');
+    const sizeInput = document.getElementById('size-input');
     
     // Set the default grid size
     let gridSize = 16;
@@ -14,14 +15,15 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Function to change the grid size
     function changeGridSize() {
-        let newSize = prompt('Enter the number of squares per side for the new grid (max 100):');
+        // Get the value from the input field
+        let newSize = sizeInput.value;
         
         // Convert input to a number and validate
         newSize = parseInt(newSize);
         
         // Check if the input is valid
         if (isNaN(newSize) || newSize <= 0) {
-            alert('Please enter a valid positive number!');
+            alert('Please enter a valid positive number between 1 and 100!');
             return;
         }
         
@@ -29,11 +31,15 @@ document.addEventListener('DOMContentLoaded', () => {
         if (newSize > 100) {
             alert('Maximum grid size is 100x100!');
             newSize = 100;
+            sizeInput.value = 100; // Update the input field
         }
         
         // Update the grid size and recreate the grid
         gridSize = newSize;
         createGrid(gridSize);
+        
+        // Clear the input field after changing the grid
+        sizeInput.value = '';
     }
     
     // Function to create the grid
