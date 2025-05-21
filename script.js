@@ -25,6 +25,11 @@ document.addEventListener('DOMContentLoaded', () => {
             // This helps ensure the flex layout works correctly
             square.style.flexBasis = `calc(100% / ${size})`;
             
+            // Add hover effect to change background color
+            square.addEventListener('mouseover', () => {
+                square.style.backgroundColor = '#333'; // Dark gray color
+            });
+            
             // Add the square to the container
             container.appendChild(square);
         }
