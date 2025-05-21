@@ -7,6 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Set the default grid size
     let gridSize = 16;
     
+    // Track current color index for cycling through ROYGBIV
+    let currentColorIndex = 0;
+    
     // Create the initial grid
     createGrid(gridSize);
     
@@ -68,8 +71,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 let interactions = parseInt(square.dataset.interactions) || 0;
                 
                 if (interactions === 0) {
-                    // First interaction - set a random rainbow color
-                    square.style.backgroundColor = getRandomRainbowColor();
+                    // First interaction - set the next color in the ROYGBIV sequence
+                    square.style.backgroundColor = getNextRainbowColor();
                 } else {
                     // Subsequent interactions - darken the existing color
                     darkenSquare(square);
@@ -84,18 +87,48 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-    // Function to get a random rainbow color (ROYGBIV)
-    function getRandomRainbowColor() {
+    // Function to get the next color in an expanded rainbow sequence (20 colors)
+    function getNextRainbowColor() {
         const colors = [
-            '#FF0000', // Red
-            '#FF7F00', // Orange
-            '#FFFF00', // Yellow
-            '#00FF00', // Green
-            '#0000FF', // Blue
-            '#4B0082', // Indigo
-            '#8B00FF'  // Violet (corrected from pink)
+            // Reds to Oranges
+            '#FF0000', // Pure Red
+            '#FF2000', // Red-Orange
+            '#FF4000', // Red-Orange
+            '#FF6000', // Orange-Red
+            '#FF8000', // Orange
+            
+            // Oranges to Yellows
+            '#FFA000', // Orange-Yellow
+            '#FFC000', // Yellow-Orange
+            '#FFE000', // Yellow-Orange
+            '#FFFF00', // Pure Yellow
+            
+            // Yellows to Greens
+            '#C0FF00', // Yellow-Green
+            '#80FF00', // Yellow-Green
+            '#40FF00', // Green-Yellow
+            '#00FF00', // Pure Green
+            
+            // Greens to Blues
+            '#00FF80', // Green-Blue
+            '#00C0FF', // Blue-Green
+            '#0080FF', // Blue
+            '#0040FF', // Blue
+            
+            // Blues to Purples
+            '#0000FF', // Pure Blue
+            '#4000FF', // Blue-Indigo
+            '#8000FF', // Indigo-Violet
+            '#A000FF'  // Violet
         ];
-        return colors[Math.floor(Math.random() * colors.length)];
+        
+        // Get the current color and increment the index for next time
+        const color = colors[currentColorIndex];
+        
+        // Increment and wrap around if needed
+        currentColorIndex = (currentColorIndex + 1) % colors.length;
+        
+        return color;
     }
     
     // Function to darken a square by 10% each time
