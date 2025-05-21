@@ -9,8 +9,19 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #f0f0f0;
+    background: linear-gradient(124deg, 
+        #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, 
+        #1ddde8, #2b1de8, #dd00f3, #dd00f3);
+    background-size: 1800% 1800%;
+    animation: rainbow-bg 18s ease infinite;
     padding: 20px;
+    min-height: 100vh;
+}
+
+@keyframes rainbow-bg {
+    0% { background-position: 0% 82% }
+    50% { background-position: 100% 19% }
+    100% { background-position: 0% 82% }
 }
 
 .header {
@@ -22,14 +33,34 @@ body {
 }
 
 .header h1 {
-    color: #333;
     font-size: 2.5rem;
     margin-bottom: 15px;
+}
+
+.rainbow-text {
+    background-image: linear-gradient(to right, 
+        #ff0000, #ff8000, #ffff00, #00ff00, #0000ff, #4b0082, #8b00ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: rainbow-text 5s ease infinite;
+    background-size: 400% 100%;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes rainbow-text {
+    0% { background-position: 0% 50% }
+    50% { background-position: 100% 50% }
+    100% { background-position: 0% 50% }
 }
 
 .controls {
     margin-bottom: 15px;
     width: 500px; /* Match the width of the container */
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .size-input-container {
@@ -73,8 +104,10 @@ button:hover {
     height: 500px;
     display: flex;
     flex-wrap: wrap;
-    border: 2px solid #333;
+    border: 5px solid rgba(255, 255, 255, 0.8);
     background-color: white;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
 }
 
 .grid-square {
